@@ -21,9 +21,7 @@ class ChatViewModel : ViewModel() {
 
     val textMessage = ObservableField<String>();
 
-    val messages: MutableLiveData<MutableList<String>> = MutableLiveData(mutableListOf())
-
-    private val messagesP: MutableList<String> = mutableListOf()
+    val messages = ObservableArrayList<String>()
 
     private lateinit var webSocket: WebSocket
 
@@ -59,8 +57,7 @@ class ChatViewModel : ViewModel() {
     }
 
     private fun addMessage(text: String){
-        messagesP.add(text!!)
-        messages.postValue(messagesP)
+        messages.add(text)
     }
 
     private fun getWebSocketListener(): WebSocketListener {

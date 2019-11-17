@@ -9,6 +9,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Binding.life = this
+        Binding.context = this
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 

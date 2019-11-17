@@ -36,11 +36,6 @@ class ChatFragment : Fragment(), ChatNavigator {
 
         viewDataBinding = DataBindingUtil.inflate(inflater, R.layout.chat_fragment, container, false)
 
-
-        val arrayAdapter = ArrayAdapter<String>(
-            activity!!,
-            android.R.layout.simple_list_item_1)
-        viewDataBinding!!.list.adapter = arrayAdapter
         return viewDataBinding!!.root
     }
 

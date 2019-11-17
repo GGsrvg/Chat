@@ -17,6 +17,7 @@
             android:id="@+id/list"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:stackFromBottom="true"
             app:adapter="@{viewModel.messages}"
             app:layout_constraintBottom_toTopOf="@+id/view"
             app:layout_constraintLeft_toLeftOf="parent"
