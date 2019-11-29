@@ -6,7 +6,7 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableArrayList
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
-import god.ggsrvg.chat.ui.ChatRecyclerAdapter
+import god.ggsrvg.chat.ui.chat.ChatRecyclerAdapter
 
 @SuppressLint("StaticFieldLeak")
 object Binding {
@@ -17,7 +17,9 @@ object Binding {
     @JvmStatic
     @BindingAdapter("adapter")
     fun setAdapter(recyclerView: RecyclerView, observableArrayList: ObservableArrayList<String>){
-        val adapter = ChatRecyclerAdapter(observableArrayList)
-        recyclerView.adapter = adapter
+//        val adapter =
+//            ChatRecyclerAdapter(
+//                observableArrayList)
+//        recyclerView.adapter = adapter
     }
 }

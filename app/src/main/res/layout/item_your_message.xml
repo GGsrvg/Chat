@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="god.ggsrvg.chat.ui.MyMessage" />
+            type="god.ggsrvg.chat.ui.chat.MyMessage" />
     </data>
 
     <LinearLayout
@@ -26,6 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="7dp"
+                android:text="@{viewModel.text}"
                 tools:text="TEST"
                 android:textColor="@android:color/white"/>
         </androidx.cardview.widget.CardView>

@@ -1,17 +1,20 @@
-package god.ggsrvg.chat.ui
+package god.ggsrvg.chat.ui.chat
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import god.ggsrvg.chat.R
 import god.ggsrvg.chat.databinding.ChatFragmentBinding
+
 
 class ChatFragment : Fragment(), ChatNavigator {
     private var viewDataBinding: ChatFragmentBinding? = null
@@ -45,14 +48,40 @@ class ChatFragment : Fragment(), ChatNavigator {
         viewDataBinding!!.setVariable(bindingVariable, viewModel)
         viewDataBinding!!.lifecycleOwner = this
         viewDataBinding!!.executePendingBindings()
+
+        val chatAdapter = ChatRecyclerAdapter(viewModel.messages)
+        viewDataBinding!!.list.adapter = chatAdapter
+        viewDataBinding!!.list.itemAnimator = DefaultItemAnimator()
+
+        val manager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        manager.stackFromEnd = true
+        viewDataBinding!!.list.layoutManager = manager
+
+        chatAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                manager.smoothScrollToPosition(viewDataBinding!!.list, null, chatAdapter.itemCount)
+            }
+        })
+
+        viewDataBinding!!.edittextChatbox.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+                if (event != null) {
+                    if (event.action == KeyEvent.ACTION_DOWN &&
+                        keyCode == KeyEvent.KEYCODE_ENTER
+                    ) { // Perform action on key press
+                        viewModel.sendMessage()
+                        return true
+                    }
+                }
+                return false
+            }
+
+        })
     }
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-
-
     }
 
     override fun onStart() {

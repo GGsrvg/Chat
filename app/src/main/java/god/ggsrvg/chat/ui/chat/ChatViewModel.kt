@@ -1,17 +1,12 @@
-package god.ggsrvg.chat.ui
+package god.ggsrvg.chat.ui.chat
 
-import android.database.Observable
+import android.util.Log
 import androidx.lifecycle.ViewModel
-import android.widget.TextView
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import okio.ByteString
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableField
-import androidx.databinding.ObservableList
-import androidx.lifecycle.MutableLiveData
+import god.ggsrvg.chat.models.Message
 import okhttp3.*
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 
@@ -21,7 +16,7 @@ class ChatViewModel : ViewModel() {
 
     val textMessage = ObservableField<String>();
 
-    val messages = ObservableArrayList<String>()
+    val messages = ObservableArrayList<Message>()
 
     private lateinit var webSocket: WebSocket
 
@@ -33,10 +28,13 @@ class ChatViewModel : ViewModel() {
         disconnectWebSocket()
     }
 
+    init{
+    }
+
     public fun sendMessage(){
         if(!textMessage.get().isNullOrEmpty()) {
-            webSocket.send(textMessage.get())
-            addMessage(textMessage.get()!!)
+            webSocket.send(textMessage.get()!!)
+            addMessage(textMessage.get()!!, true)
             textMessage.set(null)
         }
     }
@@ -56,8 +54,9 @@ class ChatViewModel : ViewModel() {
         webSocket.cancel()
     }
 
-    private fun addMessage(text: String){
-        messages.add(text)
+    private fun addMessage(text: String, isMine: Boolean = false){
+        Log.e("TEXT", "!$text!")
+        messages.add(Message(text, isMine))
     }
 
     private fun getWebSocketListener(): WebSocketListener {

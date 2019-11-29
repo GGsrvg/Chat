@@ -1,4 +1,4 @@
-package god.ggsrvg.chat.ui
+package god.ggsrvg.chat.ui.chat
 
 import androidx.databinding.Observable
 import androidx.databinding.ObservableField
