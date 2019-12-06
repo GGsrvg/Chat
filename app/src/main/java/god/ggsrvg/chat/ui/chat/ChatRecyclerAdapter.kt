@@ -27,7 +27,7 @@ class ChatRecyclerAdapter(val list: ObservableList<Message>) : RecyclerView.Adap
                 itemCount: Int
             ) {
                 Log.e(TAG, "onItemRangeRemoved")
-                notifyDataSetChanged()
+                //notifyDataSetChanged()
             }
 
             override fun onItemRangeMoved(
@@ -37,7 +37,7 @@ class ChatRecyclerAdapter(val list: ObservableList<Message>) : RecyclerView.Adap
                 itemCount: Int
             ) {
                 Log.e(TAG, "onItemRangeMoved")
-                notifyDataSetChanged()
+                //notifyDataSetChanged()
             }
 
             override fun onItemRangeInserted(
@@ -55,7 +55,7 @@ class ChatRecyclerAdapter(val list: ObservableList<Message>) : RecyclerView.Adap
                 itemCount: Int
             ) {
                 Log.e(TAG, "onItemRangeChanged")
-                notifyDataSetChanged()
+//                notifyItemRangeChanged(positionStart, itemCount)
             }
 
         })
@@ -78,6 +78,10 @@ class ChatRecyclerAdapter(val list: ObservableList<Message>) : RecyclerView.Adap
 
     override fun getItemCount(): Int {
         return list.size
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {

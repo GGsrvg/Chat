@@ -14,13 +14,22 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import god.ggsrvg.chat.R
 import god.ggsrvg.chat.databinding.ChatFragmentBinding
+import god.ggsrvg.chat.models.Message
 
 
 class ChatFragment : Fragment(), ChatNavigator {
     private var viewDataBinding: ChatFragmentBinding? = null
+
     override fun toast(text: String) {
         Toast.makeText(activity, text, Toast.LENGTH_LONG).show()
     }
+
+    override fun addMessage(message: Message) {
+        activity!!.runOnUiThread {
+            viewModel.addMessage(message)
+        }
+    }
+
     val bindingVariable: Int = 1
 
     companion object {
