@@ -24,12 +24,6 @@ class ChatFragment : Fragment(), ChatNavigator {
         Toast.makeText(activity, text, Toast.LENGTH_LONG).show()
     }
 
-    override fun addMessage(message: Message) {
-        activity!!.runOnUiThread {
-            viewModel.addMessage(message)
-        }
-    }
-
     val bindingVariable: Int = 1
 
     companion object {

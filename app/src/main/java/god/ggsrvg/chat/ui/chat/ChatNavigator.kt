@@ -4,6 +4,4 @@ import god.ggsrvg.chat.models.Message
 
 interface ChatNavigator {
     fun toast(text: String)
-
-    fun addMessage(message: Message)
 }
